@@ -6,6 +6,11 @@ function onLoad() {
         chrome.tabs.create({url: 'popup.html#window'});
         return;
     }
+
+function getCommaSeparatedVideoIds(searchResponse) {
+    return searchResponse.items.map(x => x.id.videoId).join(",");
+}
+
 function getVideoDurations(videoIds, completion) {
     $.get(
         "https://www.googleapis.com/youtube/v3/videos",
