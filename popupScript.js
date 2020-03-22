@@ -6,6 +6,16 @@ function onLoad() {
         chrome.tabs.create({url: 'popup.html#window'});
         return;
     }
+function getVideoDurations(videoIds, completion) {
+    $.get(
+        "https://www.googleapis.com/youtube/v3/videos",
+        {part: "contentDetails", id: videoIds, key: apiKey},
+        (response) => {
+            completion(response.items.map(x => x.contentDetails.duration));
+        }
+    );
+}
+
 function updateSearchResultsDiv() {
     let searchResultsDiv = $("#searchResults");
     searchResultsDiv.empty();
