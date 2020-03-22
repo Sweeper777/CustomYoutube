@@ -6,6 +6,31 @@ function onLoad() {
         chrome.tabs.create({url: 'popup.html#window'});
         return;
     }
+}
+
+function searchClick() {
+    console.log("clicked");
+    $.get(
+        "https://www.googleapis.com/youtube/v3/search",
+        {part: "snippet", q: $("#searchTerm").val
+        (), type: "video", key: apiKey, maxResults: 5},
+        (response) => {
+            let videoIds = getCommaSeparatedVideoIds(response);
+            getVideoDurations(videoIds, (durations) => {
+                const zip = (arr1, arr2) => arr1.map((k, i) => [k, arr2[i]]);
+                let newSearchResults = zip(response.items, durations).map(x => ({
+                    videoId: x[0].id.videoId,
+                    title: x[0].snippet.title,
+                    description: x[0].snippet.description,
+                    duration: x[1],
+                    thumbnail: x[0].snippet.thumbnails.medium.url
+                }));
+                searchResults = searchResults.concat(newSearchResults);
+                updateSearchResultsDiv();
+            });
+        }
+    );
+}
 
 function getCommaSeparatedVideoIds(searchResponse) {
     return searchResponse.items.map(x => x.id.videoId).join(",");
