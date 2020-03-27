@@ -52,6 +52,11 @@ function getVideoDurations(videoIds, completion) {
     );
 }
 
+function updateUI() {
+    refreshPagingControl();
+    updateSearchResultsDiv();
+}
+
 function updateSearchResultsDiv() {
     let searchResultsDiv = $("#searchResults");
     searchResultsDiv.empty();
