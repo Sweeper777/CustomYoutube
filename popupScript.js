@@ -6,6 +6,12 @@ function onLoad() {
         chrome.tabs.create({url: 'popup.html#window'});
         return;
     }
+    $("#searchButton").click(searchClick);
+    $('#searchTerm').on('keypress', function (e) {
+        if(e.which === 13){
+           $("#searchButton").trigger("click");
+        }
+    });
 }
 
 function searchClick() {
