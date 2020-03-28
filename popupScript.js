@@ -97,7 +97,9 @@ function updateUI() {
 function updateSearchResultsDiv() {
     let searchResultsDiv = $("#searchResults");
     searchResultsDiv.empty();
-    for (var i = 0 ; i < searchResults.length ; i++) {
+    let start = (currentPage - 1) * searchResultsPerPage;
+    let end = start + Math.min(searchResults.length - start, searchResultsPerPage);
+    for (var i = start; i < end; i++) {
         var htmlString = "<div class=\"row\"><div class=\"col-md-4\"><a href=\"https://youtube.com/watch?v=";
         htmlString += searchResults[i].videoId;
         htmlString += "\"><img src=\"";
@@ -111,7 +113,6 @@ function updateSearchResultsDiv() {
         htmlString += "</p><p><small>Duration: ";
         htmlString += searchResults[i].duration;
         htmlString += "</small></p></a></div></div>";
-        console.log(htmlString);
         searchResultsDiv.append(htmlString);
     }
 }
