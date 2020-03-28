@@ -1,5 +1,6 @@
 var searchResults = [
 ]
+var searchResultsPerPage = 50;
 
 function onLoad() {
     if (window.location.hash != '#window') {
@@ -12,14 +13,46 @@ function onLoad() {
            $("#searchButton").trigger("click");
         }
     });
+    chrome.storage.local.get(
+        {
+            "cachedResults": []
+        },
+        x => {
+            searchResults = x.cachedResults;
+            sortSearchResults();
+            updateUI();
+        }
+    );
 }
 
 function searchClick() {
-    console.log("clicked");
+    searchResults = []
+    fetchSearchResults(5, () => {
+        chrome.storage.local.set(
+            {
+                cachedResults: searchResults
+            }
+        );
+        sortSearchResults();
+        updateUI();
+    });
+}
+
+function fetchSearchResults(depth, completion, pageToken) {
+    if (depth === 0) {
+        completion();
+        return;
+    }
+
+    var params;
+    if (pageToken === undefined) {
+        params = {part: "snippet", q: $("#searchTerm").val(), type: "video", key: apiKey, maxResults: searchResultsPerPage};
+    } else {
+        params = {part: "snippet", q: $("#searchTerm").val(), type: "video", key: apiKey, maxResults: searchResultsPerPage, pageToken: pageToken};
+    }
+
     $.get(
-        "https://www.googleapis.com/youtube/v3/search",
-        {part: "snippet", q: $("#searchTerm").val
-        (), type: "video", key: apiKey, maxResults: 5},
+        "https://www.googleapis.com/youtube/v3/search", params,
         (response) => {
             let videoIds = getCommaSeparatedVideoIds(response);
             getVideoDurations(videoIds, (durations) => {
@@ -32,7 +65,11 @@ function searchClick() {
                     thumbnail: x[0].snippet.thumbnails.medium.url
                 }));
                 searchResults = searchResults.concat(newSearchResults);
-                updateSearchResultsDiv();
+                if (response.nextPageToken === undefined) {
+                    completion();
+                } else {
+                    fetchSearchResults(depth - 1, completion, response.nextPageToken);
+                }
             });
         }
     );
