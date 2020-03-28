@@ -166,5 +166,12 @@ function updatePagingUI() {
     updateSearchResultsDiv();
 }
 
+function addGoToPageListener(pageNum) {
+    $(".page" + pageNum).click(() => {
+        currentPage = pageNum;
+        updatePagingUI();
+    });
+}
+
 
 window.onload = onLoad;
