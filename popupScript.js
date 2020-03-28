@@ -150,5 +150,21 @@ function refreshPagingControl() {
     });
 }
 
+function updatePagingUI() {
+    $(".active").removeClass("active");
+    $(".page" + currentPage).parent().addClass("active");
+    if (currentPage === 1) {
+        $(".previous-page").parent().addClass("disabled");
+    } else {
+        $(".previous-page").parent().removeClass("disabled");
+    }
+    if (currentPage === Math.floor(searchResults.length / searchResultsPerPage)) {
+        $(".next-page").parent().addClass("disabled");
+    } else {
+        $(".next-page").parent().removeClass("disabled");
+    }
+    updateSearchResultsDiv();
+}
+
 
 window.onload = onLoad;
