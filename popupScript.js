@@ -174,5 +174,22 @@ function addGoToPageListener(pageNum) {
     });
 }
 
+var iso8601DurationRegex = /(-)?P(?:([.,\d]+)Y)?(?:([.,\d]+)M)?(?:([.,\d]+)W)?(?:([.,\d]+)D)?T(?:([.,\d]+)H)?(?:([.,\d]+)M)?(?:([.,\d]+)S)?/;
+
+window.parseISO8601Duration = function (iso8601Duration) {
+    var matches = iso8601Duration.match(iso8601DurationRegex);
+
+    return {
+        sign: matches[1] === undefined ? '+' : '-',
+        years: matches[2] === undefined ? 0 : Number(matches[2]),
+        months: matches[3] === undefined ? 0 : Number(matches[3]),
+        weeks: matches[4] === undefined ? 0 : Number(matches[4]),
+        days: matches[5] === undefined ? 0 : Number(matches[5]),
+        hours: matches[6] === undefined ? 0 : Number(matches[6]),
+        minutes: matches[7] === undefined ? 0 : Number(matches[7]),
+        seconds: matches[8] === undefined ? 0 : Number(matches[8])
+    };
+};
+
 
 window.onload = onLoad;
