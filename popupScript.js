@@ -191,5 +191,29 @@ window.parseISO8601Duration = function (iso8601Duration) {
     };
 };
 
+function durationToSeconds(duration) {
+    return duration.weeks * 7 * 24 * 60 * 60 + duration.days * 24 * 60 * 60 + duration.hours * 60 * 60 + duration.minutes * 60 + duration.seconds;
+}
+
+function durationToString(duration) {
+    let totalSeconds = durationToSeconds(duration);
+    let minutes = Math.floor(totalSeconds / 60) % 60;
+    let hours = Math.floor(totalSeconds / 3600);
+    let seconds = totalSeconds % 60;
+    var retVal;
+    if (hours > 0) {
+        retVal = hours.toString().padStart(2, '0') + ":";
+    } else {
+        retVal = "";
+    }
+    retVal += minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
+    return retVal;
+}
+
+function sortSearchResults() {
+    searchResults.sort((a, b) => {
+        return durationToSeconds(window.parseISO8601Duration(a.duration)) - durationToSeconds(window.parseISO8601Duration(b.duration));
+    });
+}
 
 window.onload = onLoad;
