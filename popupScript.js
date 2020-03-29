@@ -111,7 +111,7 @@ function updateSearchResultsDiv() {
         htmlString += "</h4><p>";
         htmlString += searchResults[i].description;
         htmlString += "</p><p><small>Duration: ";
-        htmlString += searchResults[i].duration;
+        htmlString += durationToString(window.parseISO8601Duration(searchResults[i].duration));
         htmlString += "</small></p></a></div></div>";
         searchResultsDiv.append(htmlString);
     }
