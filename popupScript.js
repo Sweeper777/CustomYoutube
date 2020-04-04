@@ -1,6 +1,7 @@
 var searchResults = [
 ]
 var searchResultsPerPage = 50;
+var sortBy = 0;
 
 function onLoad() {
     if (window.location.hash != '#window') {
@@ -19,7 +20,7 @@ function onLoad() {
         },
         x => {
             searchResults = x.cachedResults;
-            sortSearchResults();
+            sortSearchResultsDurationAscending();
             updateUI();
         }
     );
@@ -33,7 +34,7 @@ function searchClick() {
                 cachedResults: searchResults
             }
         );
-        sortSearchResults();
+        [sortSearchResultsDurationAscending, sortSearchResultsDurationDescending, sortSearchResultsLikesDescending][sortBy]()
         updateUI();
     });
 }
