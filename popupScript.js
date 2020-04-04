@@ -210,9 +210,21 @@ function durationToString(duration) {
     return retVal;
 }
 
-function sortSearchResults() {
+function sortSearchResultsDurationAscending() {
     searchResults.sort((a, b) => {
         return durationToSeconds(window.parseISO8601Duration(a.duration)) - durationToSeconds(window.parseISO8601Duration(b.duration));
+    });
+}
+
+function sortSearchResultsDurationDescending() {
+    searchResults.sort((a, b) => {
+        return -(durationToSeconds(window.parseISO8601Duration(a.duration)) - durationToSeconds(window.parseISO8601Duration(b.duration)));
+    });
+}
+
+function sortSearchResultsLikesDescending() {
+    searchResults.sort((a, b) => {
+        return -(a.likeCount - b.likeCount);
     });
 }
 
