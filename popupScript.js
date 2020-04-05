@@ -105,11 +105,11 @@ function updateSearchResultsDiv() {
     let start = (currentPage - 1) * searchResultsPerPage;
     let end = start + Math.min(searchResults.length - start, searchResultsPerPage);
     for (var i = start; i < end; i++) {
-        var htmlString = "<div class=\"row\"><div class=\"col-md-4\"><a href=\"https://youtube.com/watch?v=";
+        var htmlString = "<div class=\"row\"><div class=\"col-md-4\"><a target=\"_blank\" href=\"https://youtube.com/watch?v=";
         htmlString += searchResults[i].videoId;
         htmlString += "\"><img src=\"";
         htmlString += searchResults[i].thumbnail;
-        htmlString += "\"></a></div><div class=\"col-md-7\"><a href=\"https://youtube.com/watch?v=";
+        htmlString += "\"></a></div><div class=\"col-md-7\"><a target=\"_blank\" href=\"https://youtube.com/watch?v=";
         htmlString += searchResults[i].videoId;
         htmlString += "\"><h4>";
         htmlString += searchResults[i].title;
