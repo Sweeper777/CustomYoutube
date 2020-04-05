@@ -14,6 +14,11 @@ function onLoad() {
            $("#searchButton").trigger("click");
         }
     });
+    $("input[type=radio][name=sortBy]").change(function() {
+        sortBy = this.value;
+        [sortSearchResultsDurationAscending, sortSearchResultsDurationDescending, sortSearchResultsLikesDescending][sortBy]()
+        updateUI();
+    })
     chrome.storage.local.get(
         {
             "cachedResults": []
