@@ -2,6 +2,7 @@ var searchResults = [
 ]
 var searchResultsPerPage = 50;
 var sortBy = 0;
+var isSearching = false
 
 function onLoad() {
     if (window.location.hash != '#window') {
@@ -32,6 +33,13 @@ function onLoad() {
 }
 
 function searchClick() {
+    if (isSearching) {
+        return;
+    }
+
+    $("#searchButtonSpan").text("Searching...");
+    $("#searchButton").attr("disabled", true);
+    isSearching = true;
     searchResults = []
     fetchSearchResults(5, () => {
         chrome.storage.local.set(
@@ -41,6 +49,9 @@ function searchClick() {
         );
         [sortSearchResultsDurationAscending, sortSearchResultsDurationDescending, sortSearchResultsLikesDescending][sortBy]()
         updateUI();
+        $("#searchButtonSpan").text("Search!");
+        $("#searchButton").attr("disabled", false);
+        isSearching = false;
     });
 }
 
