@@ -133,6 +133,8 @@ function updateSearchResultsDiv() {
         htmlString += searchResults[i].description;
         htmlString += "</p><p><small>Duration: ";
         htmlString += durationToString(window.parseISO8601Duration(searchResults[i].duration));
+        htmlString += "</small></p><p><small>Likes: ";
+        htmlString += searchResults[i].likeCount;
         htmlString += "</small></p></a></div></div>";
         searchResultsDiv.append(htmlString);
     }
