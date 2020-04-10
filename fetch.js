@@ -23,6 +23,7 @@ function fetchSearchResults(depth, completion, pageToken) {
                     description: x[0].snippet.description,
                     duration: x[1].duration,
                     likeCount: x[1].likeCount,
+                    viewCount: x[1].viewCount,
                     thumbnail: x[0].snippet.thumbnails.medium.url
                 }));
                 searchResults = searchResults.concat(newSearchResults);
@@ -47,7 +48,8 @@ function getVideoDetails(videoIds, completion) {
         (response) => {
             completion(response.items.map(x => ({
                 duration: x.contentDetails.duration,
-                likeCount: x.statistics.likeCount
+                likeCount: x.statistics.likeCount,
+                viewCount: x.statistics.viewCount
             })));
         }
     );
