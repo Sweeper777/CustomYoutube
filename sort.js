@@ -51,3 +51,12 @@ function sortSearchResultsLikesDescending() {
         return -(a.likeCount - b.likeCount);
     });
 }
+
+function sortSearchResults() {
+    [
+        sortSearchResultsDurationAscending, 
+        sortSearchResultsDurationDescending, 
+        sortSearchResultsLikesDescending,
+        sortSearchResultsViewsDescending
+    ][sortBy]();
+}

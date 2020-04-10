@@ -17,7 +17,7 @@ function onLoad() {
     });
     $("input[type=radio][name=sortBy]").change(function() {
         sortBy = this.value;
-        [sortSearchResultsDurationAscending, sortSearchResultsDurationDescending, sortSearchResultsLikesDescending][sortBy]()
+        sortSearchResults();
         updateUI();
     })
     chrome.storage.local.get(
@@ -47,7 +47,7 @@ function searchClick() {
                 cachedResults: searchResults
             }
         );
-        [sortSearchResultsDurationAscending, sortSearchResultsDurationDescending, sortSearchResultsLikesDescending][sortBy]()
+        sortSearchResults();
         updateUI();
         $("#searchButtonSpan").text("Search!");
         $("#searchButton").attr("disabled", false);
