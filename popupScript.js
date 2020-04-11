@@ -76,11 +76,13 @@ function updateSearchResultsDiv() {
         htmlString += searchResults[i].title;
         htmlString += "</h4><p>";
         htmlString += searchResults[i].description;
-        htmlString += "</p><p><small>Duration: ";
+        htmlString += "</p><small>Duration: ";
         htmlString += durationToString(window.parseISO8601Duration(searchResults[i].duration));
-        htmlString += "</small></p><p><small>Likes: ";
+        htmlString += "</small><br><small>Likes: ";
         htmlString += searchResults[i].likeCount;
-        htmlString += "</small></p></a></div></div>";
+        htmlString += "</small><br><small>Views: ";
+        htmlString += searchResults[i].viewCount;
+        htmlString += "</small></a></div></div>";
         searchResultsDiv.append(htmlString);
     }
 }
