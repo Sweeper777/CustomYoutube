@@ -1,6 +1,6 @@
   {
     "name": "Custom Youtube",
-    "version": "0.2",
+    "version": "1.0",
     "description": "Orders Youtube videos by duration, among other stuff",
     "browser_action": {
       "default_popup": "popup.html",
