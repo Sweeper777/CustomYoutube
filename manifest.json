@@ -11,5 +11,8 @@
       "https://www.googleapis.com/",
       "https://i.ytimg.com/",
       "storage"
-    ]
+    ],
+    "icons": {
+      "128": "icon128.png"
+    }
   }
