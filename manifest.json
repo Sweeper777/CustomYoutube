@@ -14,5 +14,10 @@
     ],
     "icons": {
       "128": "icon128.png"
-    }
+    },
+    "omnibox": { "keyword" : "cy" },
+    "background": {
+      "persistent": false,
+      "scripts": ["background.js"]
+    },
   }
