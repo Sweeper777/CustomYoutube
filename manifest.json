@@ -10,7 +10,8 @@
     "permissions": [
       "https://www.googleapis.com/",
       "https://i.ytimg.com/",
-      "storage"
+      "storage",
+      "tabs"
     ],
     "icons": {
       "128": "icon128.png"
