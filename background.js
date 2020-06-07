@@ -17,7 +17,9 @@ function getVideoDetails(videoIds, completion) {
 }
 
 function input() {
+    console.log("input!")
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+        console.log("queried!")
         chrome.tabs.sendMessage(tabs[0].id, {action: "getVideos"}, function(response) {
             if (response) {
                 getVideoDetails(videoIds.join(","), response => {
@@ -29,3 +31,4 @@ function input() {
     });
 }
 chrome.omnibox.onInputEntered.addListener(input);
+console.log("background script run!");
