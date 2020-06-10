@@ -11,7 +11,7 @@
       "https://www.googleapis.com/",
       "https://i.ytimg.com/",
       "storage",
-      "tabs"
+      "activeTab"
     ],
     "icons": {
       "128": "icon128.png"
