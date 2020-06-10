@@ -19,13 +19,13 @@
     "omnibox": { "keyword" : "cy" },
     "background": {
       "persistent": false,
-      "scripts": ["background.js"]
+      "scripts": ["secret.js", "node_modules/jquery/dist/jquery.min.js", "background.js"]
     },
     "content_scripts": [
       {
         "matches": ["https://*.youtube.com/*"],
         "css": [],
-        "js": ["secret.js", "node_modules/jquery/dist/jquery.min.js", "contentScript.js"]
+        "js": ["node_modules/jquery/dist/jquery.min.js", "contentScript.js"]
       }
     ]
   }
