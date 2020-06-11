@@ -11,7 +11,7 @@ chrome.runtime.onMessage.addListener(
             var allVideoElements = $("ytd-rich-grid-video-renderer, ytd-grid-video-renderer, ytd-video-renderer");
             var aTags = allVideoElements.find("a#thumbnail").get();
             var hrefs = aTags.map(x => $(x).attr("href"));
-            var videoIds = hrefs.map(parseHref).filter(x => x).slice(0, 50);
+            var videoIds = hrefs.map(parseHref).filter(x => x).slice(0, 250);
             sendResponse(videoIds)
         }
     });
