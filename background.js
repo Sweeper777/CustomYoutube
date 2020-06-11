@@ -1,16 +1,29 @@
 // Credit to https://www.npmjs.com/package/text-ellipsis
 function textEllipsis(str, maxLength, { side = "end", ellipsis = "..." } = {}) {
     if (str.length > maxLength) {
-      switch (side) {
-        case "start":
-          return ellipsis + str.slice(-(maxLength - ellipsis.length));
-        case "end":
-        default:
-          return str.slice(0, maxLength - ellipsis.length) + ellipsis;
-      }
+        switch (side) {
+            case "start":
+            return ellipsis + str.slice(-(maxLength - ellipsis.length));
+            case "end":
+            default:
+            return str.slice(0, maxLength - ellipsis.length) + ellipsis;
+        }
     }
     return str;
-  }
+}
+
+function chunkArray(myArray, chunkSize){
+    var index = 0;
+    var arrayLength = myArray.length;
+    var tempArray = [];
+    
+    for (index = 0; index < arrayLength; index += chunkSize) {
+        myChunk = myArray.slice(index, index+chunkSize);
+        tempArray.push(myChunk);
+    }
+
+    return tempArray;
+}
 
 function getVideoDetails(videoIds, completion) {
     $.get(
