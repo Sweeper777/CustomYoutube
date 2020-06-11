@@ -26,21 +26,32 @@ function chunkArray(myArray, chunkSize){
 }
 
 function getVideoDetails(videoIds, completion) {
-    $.get(
-        "https://www.googleapis.com/youtube/v3/videos",
-        {part: "contentDetails,statistics,snippet", id: videoIds, key: apiKey},
-        (response) => {
-            completion(response.items.map(x => ({
-                videoId: x.id,
-                title: x.snippet.title,
-                description: textEllipsis(x.snippet.description, 400),
-                duration: x.contentDetails.duration,
-                likeCount: x.statistics.likeCount,
-                viewCount: x.statistics.viewCount,
-                thumbnail: x.snippet.thumbnails.medium.url
-            })));
-        }
-    );
+    var chunksOf50 = chunkArray(videoIds, 50);
+    getVideoDetailsImpl(chunksOf50, completion)
+}
+
+function getVideoDetailsImpl(videoIdChunks, completion) {
+    var [first, ...rest] = videoIdChunks;
+    if (first) {
+        $.get(
+            "https://www.googleapis.com/youtube/v3/videos",
+            {part: "contentDetails,statistics,snippet", id: first, key: apiKey},
+            (response) => {
+                var videos = response.items.map(x => ({
+                    videoId: x.id,
+                    title: x.snippet.title,
+                    description: textEllipsis(x.snippet.description, 400),
+                    duration: x.contentDetails.duration,
+                    likeCount: x.statistics.likeCount,
+                    viewCount: x.statistics.viewCount,
+                    thumbnail: x.snippet.thumbnails.medium.url
+                }));
+                getVideoDetailsImpl(rest, response => completion(videos.concat(response)));
+            }
+        );
+    } else {
+        completion([]);
+    }
 }
 
 function input() {
