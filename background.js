@@ -1,3 +1,17 @@
+// Credit to https://www.npmjs.com/package/text-ellipsis
+function textEllipsis(str, maxLength, { side = "end", ellipsis = "..." } = {}) {
+    if (str.length > maxLength) {
+      switch (side) {
+        case "start":
+          return ellipsis + str.slice(-(maxLength - ellipsis.length));
+        case "end":
+        default:
+          return str.slice(0, maxLength - ellipsis.length) + ellipsis;
+      }
+    }
+    return str;
+  }
+
 function getVideoDetails(videoIds, completion) {
     $.get(
         "https://www.googleapis.com/youtube/v3/videos",
@@ -6,7 +20,7 @@ function getVideoDetails(videoIds, completion) {
             completion(response.items.map(x => ({
                 videoId: x.id,
                 title: x.snippet.title,
-                description: x.snippet.description,
+                description: textEllipsis(x.snippet.description, 400),
                 duration: x.contentDetails.duration,
                 likeCount: x.statistics.likeCount,
                 viewCount: x.statistics.viewCount,
