@@ -4,7 +4,7 @@ function refreshPagingControl() {
     currentPage = 1;
     let pagingUl = $(".pagination");
     pagingUl.empty();
-    let pageCount = Math.floor(searchResults.length / searchResultsPerPage);
+    let pageCount = Math.ceil(searchResults.length / searchResultsPerPage);
     pagingUl.append("<li class=\"page-item disabled\"><a class=\"page-link previous-page\" href=\"#window\">Previous</a></li>");
     $(".previous-page").click(() => {
         if (currentPage > 1) {
@@ -25,7 +25,7 @@ function refreshPagingControl() {
         pagingUl.append("<li class=\"page-item\"><a class=\"page-link next-page\" href=\"#window\">Next</a></li>");
     }
     $(".next-page").click(() => {
-        if (currentPage < Math.floor(searchResults.length / searchResultsPerPage)) {
+        if (currentPage < Math.ceil(searchResults.length / searchResultsPerPage)) {
             currentPage += 1;
             updatePagingUI();
         }
@@ -40,7 +40,7 @@ function updatePagingUI() {
     } else {
         $(".previous-page").parent().removeClass("disabled");
     }
-    if (currentPage === Math.floor(searchResults.length / searchResultsPerPage)) {
+    if (currentPage === Math.ceil(searchResults.length / searchResultsPerPage)) {
         $(".next-page").parent().addClass("disabled");
     } else {
         $(".next-page").parent().removeClass("disabled");
