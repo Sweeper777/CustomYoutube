@@ -40,7 +40,7 @@ function getVideoDetailsImpl(videoIdChunks, completion) {
                 var videos = response.items.map(x => ({
                     videoId: x.id,
                     title: x.snippet.title,
-                    description: textEllipsis(x.snippet.description, 400),
+                    description: textEllipsis(x.snippet.description, 160),
                     duration: x.contentDetails.duration,
                     likeCount: x.statistics.likeCount,
                     viewCount: x.statistics.viewCount,
