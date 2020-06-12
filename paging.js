@@ -9,8 +9,9 @@ function refreshPagingControl() {
     $(".previous-page").click(() => {
         if (currentPage > 1) {
             currentPage -= 1;
+            updatePagingUI();
+            $(window).scrollTop(0); 
         }
-        updatePagingUI();
     });
     pagingUl.append("<li class=\"page-item active\"><a class=\"page-link page1\" href=\"#window\">1</a></li>");
     addGoToPageListener(1);
@@ -28,6 +29,7 @@ function refreshPagingControl() {
         if (currentPage < Math.ceil(searchResults.length / searchResultsPerPage)) {
             currentPage += 1;
             updatePagingUI();
+            $(window).scrollTop(0); 
         }
     });
 }
@@ -52,5 +54,6 @@ function addGoToPageListener(pageNum) {
     $(".page" + pageNum).click(() => {
         currentPage = pageNum;
         updatePagingUI();
+        $(window).scrollTop(0); 
     });
 }
