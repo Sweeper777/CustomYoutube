@@ -76,4 +76,3 @@ function input(string) {
     }
 }
 chrome.omnibox.onInputEntered.addListener(input);
-console.log("background script run!");

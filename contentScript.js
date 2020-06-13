@@ -6,7 +6,6 @@ function parseHref(href) {
 
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-        console.log("message received");
         if (request.action === "getVideos") {
             var allVideoElements = $("ytd-rich-grid-video-renderer, ytd-grid-video-renderer, ytd-video-renderer");
             var aTags = allVideoElements.find("a#thumbnail").get();
