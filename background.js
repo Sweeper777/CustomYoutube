@@ -35,7 +35,7 @@ function getVideoDetailsImpl(videoIdChunks, completion) {
     if (first) {
         $.get(
             "https://www.googleapis.com/youtube/v3/videos",
-            {part: "contentDetails,statistics,snippet", id: first, key: apiKey},
+            {part: "contentDetails,statistics,snippet", id: first.join(","), key: apiKey},
             (response) => {
                 var videos = response.items.map(x => ({
                     videoId: x.id,
