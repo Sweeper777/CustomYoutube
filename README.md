@@ -18,12 +18,18 @@ In fact, the YouTube Data API doesn't have a sort by duration option either, so 
 
 # How to use
 
+## Popup - Sort the search results!
+
 1. Click the popup icon on the top right of chrome. 
 2. A new tab with a search box will appear. 
 3. Type in the search box and search.
 4. Wait a few seconds.
 5. The search results will be sorted!
 
-# Upcoming feature
+## Omnibox - Sort the videos that are in the active tab!
 
-- sort the videos that are on the active YouTube tab
+1. Go to a YouTube page containing some videos
+2. Type in `cy` and a space
+3. Optionally, include 2 one-based indices, separated by commas, indicating the start and end index of the videos you want to sort. e.g. `10,50` means "sort the 10th to the 50th video".
+4. Press enter and wait!
+
