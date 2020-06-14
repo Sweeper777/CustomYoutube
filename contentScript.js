@@ -1,5 +1,5 @@
 function parseHref(href) {
-    var regex = /^\/watch\?v=([^&]+)$/;
+    var regex = /^\/watch\?v=([A-Za-z0-9_-]+)/;
     var match = regex.exec(href);
     return match[1] ?? undefined;
 }
